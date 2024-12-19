@@ -40,16 +40,44 @@ Instale as dependências do projeto:
 ```bash
 poetry install
 ```
-Entre no ambiente virtual
+Entre no ambiente virtual:
 
 ```bash
 poetry shell
 ```
-Inicie o servidor
+Inicie o servidor:
 
 ```bash
 task run
 ```
+Entre no servidor:
+
+http://127.0.0.1:8000
+
+## Como Testar as Requisições?
+
+## GET
+
+Para acessar as tarefas cadastradas, acesse http://127.0.0.1:8000/tasks
+
+### POST
+
+```bash
+curl -X POST "http://127.0.0.1:8000/tasks" -H "Content-Type: application/json" -d '{"title": "walk with the dog", "description": "at least 1h"}'
+```
+
+### PUT
+
+```bash
+curl -X PUT "http://127.0.0.1:8000/tasks/1" -H "Content-Type: application/json" -d '{"status": "completed"}'
+``` 
+
+### DELETE
+
+```bash
+curl -X DELETE "http://127.0.0.1:8000/tasks/1"
+```
+
 
 ## Documentação Automática do Swagger UI
 
