@@ -21,6 +21,12 @@ class UpdateTaskStatus(BaseModel):
 @app.post('/tasks')
 def create_task(task: Task):
     global task_id_counter
+
+    if len(task.title.strip()) == 0:
+        raise HTTPException(
+            status_code=400, detail="Title cannot be empty or whitespace"
+        )
+    
     new_task = {
         'id': task_id_counter,
         'title': task.title,
