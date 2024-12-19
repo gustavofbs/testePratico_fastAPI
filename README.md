@@ -33,7 +33,12 @@ cd toDo_list
 Configure a versão do Python no diretório:
 
 ```bash
-pyenv local 3.12.3
+pyenv local 3.12.8
+```
+Instale as dependências do projeto:
+
+```bash
+poetry install
 ```
 Entre no ambiente virtual
 
