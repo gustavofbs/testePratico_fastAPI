@@ -8,6 +8,7 @@ app = FastAPI()
 tasks = []
 task_id_counter = 1
 
+
 class Task(BaseModel):
     title: str
     description: Optional[str] = None
@@ -21,19 +22,21 @@ class UpdateTaskStatus(BaseModel):
 def create_task(task: Task):
     global task_id_counter
     new_task = {
-        "id": task_id_counter,
-        "title": task.title,
-        "description": task.description,
-        "status": "pending"
+        'id': task_id_counter,
+        'title': task.title,
+        'description': task.description,
+        'status': 'pending',
     }
 
     tasks.append(new_task)
     task_id_counter += 1
     return new_task
 
+
 @app.get('/tasks')
 def list_tasks():
     return tasks
+
 
 @app.put('/tasks/{task_id}')
 def update_task(task_id: int, update: UpdateTaskStatus):
@@ -43,8 +46,20 @@ def update_task(task_id: int, update: UpdateTaskStatus):
             return task
     raise HTTPException(status_code=404, detail='Task Not Found')
 
+
 @app.delete('/tasks/{task_id}')
 def delete_task(task_id: int):
     global tasks
-    tasks = [task for task in tasks if task['id'] != task_id]
-    return {"message": "Task deleted sucessfuly"}
+    task_found = False  # Como um "sentinela", ele muda o estado de False para True na condição abaixo, caso o "id" de exclusão exista
+
+    # Percorre a lista, inserindo aquelas tarefas que não fazem parte do "id" escolhido pelo usuário, isso se ela existir
+    tasks = [
+        task
+        for task in tasks
+        if not (task['id'] == task_id and (task_found := True))
+    ]
+
+    if not task_found:
+        raise HTTPException(status_code=404, detail='Task Not Found')
+
+    return {'message': 'Task deleted successfully'}
