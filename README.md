@@ -27,3 +27,59 @@ fastapi dev todo_list/app.py
 poetry add 'fastapi[standard]'
 ```
 
+## Documentação Automática do Swagger UI
+
+### GET
+
+<center> 
+
+![GET](./assets/getDoc.png)
+
+| Parâmetro    | Tipo | Obrigatório | Descrição                |
+|--------------|------|-------------|--------------------------|
+
+</center>
+
+___
+
+### POST
+
+<center>
+
+![POST](./assets/postDoc.png)
+
+| Parâmetro    | Tipo | Obrigatório | Descrição                |
+|--------------|------|-------------|--------------------------|
+| title        | str  | Sim         | O título da tarefa       |
+| description  | str  | Não         | A descrição da tarefa    |
+
+</center>
+
+___
+
+### PUT
+
+<center>
+
+![PUT](./assets/putDoc.png)
+
+| Parâmetro    | Tipo | Obrigatório | Descrição                |
+|--------------|------|-------------|--------------------------|
+| task_id      | str  | Sim         | O ID da tarefa           |
+| status       | str  | Sim         | Novo status da tarefa    |
+
+</center>
+
+___
+
+### DELETE
+
+<center>
+
+![DELETE](./assets/deleteDoc.png)
+
+| Parâmetro    | Tipo | Obrigatório | Descrição                |
+|--------------|------|-------------|--------------------------|
+| task_id      | str  | Sim         | O ID da tarefa           |
+
+</center>
