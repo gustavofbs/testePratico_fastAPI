@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import Literal, Optional
 
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
@@ -13,18 +13,19 @@ class Task(BaseModel):
     title: str
     description: Optional[str] = None
 
-
+# Optei em alterar o UpdateTaskStatus tendo em vista que o status deve ser 'pending' ou 'completed'
 class UpdateTaskStatus(BaseModel):
-    status: str
+    status: Literal['pending', 'completed']
 
 
 @app.post('/tasks')
 def create_task(task: Task):
     global task_id_counter
 
+    # Exceção para quando o title estiver vazio
     if len(task.title.strip()) == 0:
         raise HTTPException(
-            status_code=400, detail="Title cannot be empty or whitespace"
+            status_code=400, detail="Title cannot be empty"
         )
     
     new_task = {
@@ -56,7 +57,7 @@ def update_task(task_id: int, update: UpdateTaskStatus):
 @app.delete('/tasks/{task_id}')
 def delete_task(task_id: int):
     global tasks
-    task_found = False  # Como um "sentinela", ele muda o estado de False para True na condição abaixo, caso o "id" de exclusão exista
+    task_found = False  # Como um "sentinela", ele muda o estado de False para True na condição abaixo, caso o "id" da exclusão exista
 
     # Percorre a lista, inserindo aquelas tarefas que não fazem parte do "id" escolhido pelo usuário, isso se ela existir
     tasks = [

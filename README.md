@@ -1,10 +1,26 @@
-# testePratico_fastAPI
+# Teste Prático - CRUD | FastAPI
 
 ## Requisitos para executar o teste prático:
 
-Poetry | Versão utilizada: 1.8.5
-Python | Versão utilizada: 3.12.8
+| Ferramenta   | Versão Utilizada |
+|--------------|------------------|
+| Poetry       | 1.8.5            | 
+| Python       | 3.12.8           | 
 
+### Caso não possua alguma específica
+
+#### Poetry
+
+```bash
+pipx install poetry
+```
+
+#### Python
+
+```bash
+pyenv update
+pyenv install 3.12.8
+```
 
 ## Como executar
 
@@ -13,18 +29,21 @@ Entre na pasta do projeto:
 ```bash
 cd toDo_list
 ```
+
+Configure a versão do Python no diretório:
+
+```bash
+pyenv local 3.12.3
+```
+Entre no ambiente virtual
+
+```bash
+poetry shell
+```
 Inicie o servidor
 
 ```bash
-fastapi dev todo_list/app.py
-```
-
-## Dependências Instaladas
-
-### FastAPI
-
-```bash
-poetry add 'fastapi[standard]'
+task run
 ```
 
 ## Documentação Automática do Swagger UI
