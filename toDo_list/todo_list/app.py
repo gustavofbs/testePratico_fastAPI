@@ -1,6 +1,7 @@
 from typing import Literal, Optional
 
 from fastapi import FastAPI, HTTPException
+from http import HTTPStatus
 from pydantic import BaseModel
 
 app = FastAPI()
@@ -25,7 +26,7 @@ def create_task(task: Task):
     # Exceção para quando o title estiver vazio
     if len(task.title.strip()) == 0:
         raise HTTPException(
-            status_code=400, detail="Title cannot be empty"
+            status_code=400, detail="Bad Request"
         )
     
     new_task = {
